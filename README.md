@@ -1,16 +1,158 @@
-## Hi there 👋
+```text
+╔══════════════════════════════════╗
+║                                  ║
+║    John Petsis                   ║
+║    Systems · Languages           ║
+║                                  ║
+╚══════════════════════════════════╝
+```
 
-<!--
-**JPetsis/JPetsis** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<picture>
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset="https://img.shields.io/badge/-Systems%20%26%20Languages%20Engineer-1a1a2e?style=for-the-badge&labelColor=0f3460"
+  />
+  <img
+    alt="tagline"
+    src="https://img.shields.io/badge/-Systems%20%26%20Languages%20Engineer-1a1a2e?style=for-the-badge&labelColor=0f3460"
+  />
+</picture>
 
-Here are some ideas to get you started:
+I build **programming language infrastructure** and **full-stack systems** — from JIT-compiled runtime engines to production web applications.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+- **libsnobol4** — A high-performance SNOBOL4 string-processing engine in C with a multi-architecture JIT compiler (ARM64, ARM32, RISC-V 64, x86-64). Pattern matching, template substitution, zero interpreter fallback.
+- **cadence** — A multi-tenant driving school management platform in Go, using chi, PostgreSQL, HTMX, and TailwindCSS.
+- Ask me about **compilers, JIT design, language runtimes, or building web apps with Go & Laravel.**
+
+---
+
+
+
+## Tech
+
+<table>
+  <tr>
+    <th colspan="2" align="left">Languages</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white"/>
+      <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white"/>
+      <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white"/>
+      <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white"/>
+      <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/>
+      <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
+      <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+      <img src="https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white"/>
+      <img src="https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white"/>
+      <img src="https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=postgresql&logoColor=white"/>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th colspan="2" align="left">Frameworks & Tools</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white"/>
+      <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black"/>
+      <img src="https://img.shields.io/badge/Inertia.js-9553E9?style=for-the-badge&logo=inertia&logoColor=white"/>
+      <img src="https://img.shields.io/badge/HTMX-3366CC?style=for-the-badge&logo=htmx&logoColor=white"/>
+      <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"/>
+      <img src="https://img.shields.io/badge/shadcn/ui-000000?style=for-the-badge&logo=shadcnui&logoColor=white"/>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white"/>
+      <img src="https://img.shields.io/badge/CMake-064F8C?style=for-the-badge&logo=cmake&logoColor=white"/>
+      <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
+      <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white"/>
+      <img src="https://img.shields.io/badge/PHPUnit-366488?style=for-the-badge&logo=phpunit&logoColor=white"/>
+      <img src="https://img.shields.io/badge/sqlc-16213E?style=for-the-badge&logo=go&logoColor=white"/>
+    </td>
+  </tr>
+</table>
+
+---
+
+## Featured Project
+
+### <picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/libsnobol4-16213E?style=for-the-badge&labelColor=0f3460&logo=c&logoColor=white"/><img src="https://img.shields.io/badge/libsnobol4-0f3460?style=for-the-badge&logo=c&logoColor=white"/></picture>
+
+A **high-performance SNOBOL4** string-processing engine in C — a PCRE alternative with an optional **multi-architecture JIT compiler**.
+
+```
+┌────────────────────────────────────────────────────┐
+│  SNOBOL4 VM ──► IR Lift ──► DCE/Copy-Prop          │
+│  ──► arm64 / arm32 / riscv64 / x86_64 code         │
+│  Full opcode coverage — zero interpreter fallback  │
+└────────────────────────────────────────────────────┘
+```
+
+| Feature                   | Detail                                                                                                            |
+|---------------------------|-------------------------------------------------------------------------------------------------------------------|
+| **JIT Backends**          | ARM64, ARMv7-A (Thumb-2), RISC-V 64, x86-64 (AMD64)                                                               |
+| **Platforms**             | macOS ARM64/Intel, Linux AArch64/x86-64/ARMv7/RISC-V, Windows x86-64                                              |
+| **Bindings**              | PHP (stable) — Python reference in progress                                                                       |
+| **Pattern Engine**        | Backtracking VM with catastrophic backtracking protection, compact choice stack, UTF-8 with full BMP case folding |
+| **Template Substitution** | Compiled C VM instructions — captures, formatting, table lookups                                                  |
+| **CI**                    | Native ARM64 + QEMU-emulated AArch64/ARMv7/RISC-V + native x86-64 across Linux, macOS, Windows                    |
+| **Distro**                | Homebrew (macOS), PIE (PHP), GitHub Releases                                                                      |
+
+```c
+// One-shot convenience API
+snobol_match_result_t *r = snobol_match(
+    "'abc' ARB 'def'", 15, "xyz abc def xyz", 15, 0
+)
+```
+
+[ ![CI](https://img.shields.io/github/actions/workflow/status/JPetsis/libsnobol4/ci-core.yml?label=CI&logo=github) ](https://github.com/JPetsis/libsnobol4)
+[ ![PHP](https://img.shields.io/github/actions/workflow/status/JPetsis/libsnobol4/ci-php.yml?label=PHP%20binding&logo=php) ](https://github.com/JPetsis/libsnobol4)
+[ ![Sanitizers](https://img.shields.io/github/actions/workflow/status/JPetsis/libsnobol4/sanitizers.yml?label=sanitizers&logo=github) ](https://github.com/JPetsis/libsnobol4)
+
+---
+
+## Projects
+
+### cadence
+<img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white"/>
+<img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white"/>
+<img src="https://img.shields.io/badge/HTMX-3366CC?style=for-the-badge&logo=htmx&logoColor=white"/>
+<img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"/>
+<img src="https://img.shields.io/badge/chi_router-0077B5?style=for-the-badge&logo=go&logoColor=white"/>
+<img src="https://img.shields.io/badge/sqlc-16213E?style=for-the-badge&logo=go&logoColor=white"/>
+<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
+
+A multi-tenant driving school management platform — scheduling engine, instructor/student/vehicle management, role-based auth, session management, and contact forms.
+
+[cadence →](https://github.com/JPetsis/cadence)
+
+
+---
+
+## GitHub
+
+<picture>
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset="https://github-readme-stats.vercel.app/api?username=JPetsis&show_icons=true&count_private=true&hide_border=true&theme=tokyonight&hide_rank=true"
+  />
+  <img
+    alt="GitHub stats"
+    src="https://github-readme-stats.vercel.app/api?username=JPetsis&show_icons=true&count_private=true&hide_border=true&hide_rank=true"
+  />
+</picture>
+
+<picture>
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=JPetsis&layout=compact&hide_border=true&theme=tokyonight&langs_count=10&hide=blade,makefile,smarty,procfile"
+  />
+  <img
+    alt="Top languages"
+    src="https://github-readme-stats.vercel.app/api/top-langs/?username=JPetsis&layout=compact&hide_border=true&langs_count=10&hide=blade,makefile,smarty,procfile"
+  />
+</picture>
