@@ -80,7 +80,7 @@ I build **programming language infrastructure** and **full-stack systems** — f
 
 ### <picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/libsnobol4-16213E?style=for-the-badge&labelColor=0f3460&logo=c&logoColor=white"/><img src="https://img.shields.io/badge/libsnobol4-0f3460?style=for-the-badge&logo=c&logoColor=white"/></picture>
 
-A **high-performance SNOBOL4** string-processing engine in C — a PCRE alternative with **computed-goto dispatch, 9-tier search acceleration, DFA automaton, and trie-based alternation matching**.
+A **high-performance SNOBOL4** string-processing engine in C — a PCRE alternative with **computed-goto dispatch, 10-tier search acceleration, DFA automaton, and trie-based alternation matching**.
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
