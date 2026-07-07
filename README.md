@@ -20,7 +20,7 @@
 
 I build **programming language infrastructure** and **full-stack systems** — from multi-tier pattern matching engines to production web applications.
 
-- **libsnobol4** — A high-performance SNOBOL4 string-processing engine in C with computed-goto dispatch, 9-tier search acceleration (BMH, DFA automaton, trie), start-byte bitmap filtering, and SIMD-ready architecture. Pattern matching, template substitution, zero-allocation literal matching.
+- **libsnobol4** — A high-performance SNOBOL4 string-processing engine in C with computed-goto dispatch, 10-tier search acceleration (BMH, DFA automaton, trie), start-byte bitmap filtering, and SIMD-ready architecture. Pattern matching, template substitution, zero-allocation literal matching.
 - **cadence** — A multi-tenant driving school management platform in Go, using chi, PostgreSQL, HTMX, and TailwindCSS.
 - Ask me about **compilers, language runtimes, search engines, or building web apps with Go & Laravel.**
 
@@ -85,7 +85,7 @@ A **high-performance SNOBOL4** string-processing engine in C — a PCRE alternat
 ```
 ┌──────────────────────────────────────────────────────────────────┐
 │  SNOBOL4 VM — computed-goto dispatch (15-30% over switch)        │
-│  10-tier search: BMH · bitmap · trie · DFA automaton · search-VM  │
+│  10-tier search: BMH · bitmap · trie · DFA automaton · search-VM │
 │  Start-byte bitmap · min-length pre-check · literal fast-path    │
 └──────────────────────────────────────────────────────────────────┘
 ```
