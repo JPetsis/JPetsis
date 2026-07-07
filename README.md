@@ -18,11 +18,11 @@
   />
 </picture>
 
-I build **programming language infrastructure** and **full-stack systems** — from JIT-compiled runtime engines to production web applications.
+I build **programming language infrastructure** and **full-stack systems** — from multi-tier pattern matching engines to production web applications.
 
-- **libsnobol4** — A high-performance SNOBOL4 string-processing engine in C with computed-goto dispatch, Boyer-Moore-Horspool acceleration, trie-based alternation matching, and start-byte bitmap filtering. Pattern matching, template substitution, zero JIT fallback.
+- **libsnobol4** — A high-performance SNOBOL4 string-processing engine in C with computed-goto dispatch, 9-tier search acceleration (BMH, DFA automaton, trie), start-byte bitmap filtering, and SIMD-ready architecture. Pattern matching, template substitution, zero-allocation literal matching.
 - **cadence** — A multi-tenant driving school management platform in Go, using chi, PostgreSQL, HTMX, and TailwindCSS.
-- Ask me about **compilers, JIT design, language runtimes, or building web apps with Go & Laravel.**
+- Ask me about **compilers, language runtimes, search engines, or building web apps with Go & Laravel.**
 
 ---
 
@@ -80,25 +80,25 @@ I build **programming language infrastructure** and **full-stack systems** — f
 
 ### <picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/libsnobol4-16213E?style=for-the-badge&labelColor=0f3460&logo=c&logoColor=white"/><img src="https://img.shields.io/badge/libsnobol4-0f3460?style=for-the-badge&logo=c&logoColor=white"/></picture>
 
-A **high-performance SNOBOL4** string-processing engine in C — a PCRE alternative with **computed-goto dispatch, BMH acceleration, trie-based alternation matching, and start-byte bitmap filtering**.
+A **high-performance SNOBOL4** string-processing engine in C — a PCRE alternative with **computed-goto dispatch, 9-tier search acceleration, DFA automaton, and trie-based alternation matching**.
 
 ```
-┌──────────────────────────────────────────────────────────┐
-│  SNOBOL4 VM — computed-goto dispatch (15-30% over sw)    │
-│  6-tier search acceleration: BMH · bitmap · trie · auto  │
-│  Start-byte bitmap · min-length pre-check                │
-└──────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────┐
+│  SNOBOL4 VM — computed-goto dispatch (15-30% over switch)        │
+│  10-tier search: BMH · bitmap · trie · DFA automaton · search-VM  │
+│  Start-byte bitmap · min-length pre-check · literal fast-path    │
+└──────────────────────────────────────────────────────────────────┘
 ```
 
 | Feature                   | Detail                                                                                                            |
 |---------------------------|-------------------------------------------------------------------------------------------------------------------|
 | **Dispatch**              | Computed-goto opcode dispatch (15-30% faster). MSVC switch fallback.                                              |
-| **Search Acceleration**   | 6-tier pipeline: BREAK/SPAN → literal-only → literal-prefix (BMH skip) → bitmap → alt-literals trie → general VM  |
+| **Search Acceleration**   | 10-tier pipeline: BREAK/SPAN → literal-only → literal-prefix (BMH) → bitmap → alt-literals trie → search-VM → DFA automaton → SIMD NFA → general VM |
 | **Platforms**             | macOS ARM64/Intel, Linux AArch64/x86-64/ARMv7/RISC-V, Windows x86-64                                              |
 | **Bindings**              | PHP (stable) — Python reference in progress                                                                       |
 | **Pattern Engine**        | Backtracking VM with computed-goto dispatch, catastrophic backtracking protection, compact choice stack, UTF-8 with full BMP case folding |
 | **Template Substitution** | Compiled C VM instructions — captures, formatting, table lookups                                                  |
-| **CI**                    | Native ARM64 + QEMU-emulated AArch64/ARMv7/RISC-V + native x86-64 across Linux, macOS, Windows                    |
+| **CI**                    | Native runners: macOS ARM64/x86-64, Linux AArch64/x86-64/ARMv7/RISC-V, Windows x86-64                            |
 | **Distro**                | Homebrew (macOS), PIE (PHP), GitHub Releases                                                                      |
 
 ```c
