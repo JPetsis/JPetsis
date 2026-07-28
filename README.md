@@ -20,7 +20,7 @@
 
 I build **programming language infrastructure** and **full-stack systems** — from multi-tier pattern matching engines to production web applications.
 
-- **libsnobol4** — A high-performance SNOBOL4 string-processing engine in C with computed-goto dispatch, 10-tier search acceleration (BMH, DFA automaton, trie), start-byte bitmap filtering, and SIMD-ready architecture. Pattern matching, template substitution, zero-allocation literal matching.
+- **libsnobol4** — A high-performance SNOBOL4 string-processing engine in C with computed-goto dispatch, 11-tier search acceleration (pattern fusion, SIMD NFA, DFA automaton, trie, BMH), required-byte prefilter, batch all-matches API, and lean ~8 ns/call single-literal search. Pattern matching, template substitution, capture support.
 - **cadence** — A multi-tenant driving school management platform in Go, using chi, PostgreSQL, HTMX, and TailwindCSS.
 - Ask me about **compilers, language runtimes, search engines, or building web apps with Go & Laravel.**
 
@@ -80,25 +80,26 @@ I build **programming language infrastructure** and **full-stack systems** — f
 
 ### <picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/libsnobol4-16213E?style=for-the-badge&labelColor=0f3460&logo=c&logoColor=white"/><img src="https://img.shields.io/badge/libsnobol4-0f3460?style=for-the-badge&logo=c&logoColor=white"/></picture>
 
-A **high-performance SNOBOL4** string-processing engine in C — a PCRE alternative with **computed-goto dispatch, 10-tier search acceleration, DFA automaton, and trie-based alternation matching**.
+A **high-performance SNOBOL4** string-processing engine in C — a PCRE alternative with **11-tier search acceleration (pattern fusion, SIMD NFA, DFA automaton, trie), required-byte prefilter, batch API, and computed-goto dispatch**.
 
 ```
-┌──────────────────────────────────────────────────────────────────┐
-│  SNOBOL4 VM — computed-goto dispatch (15-30% over switch)        │
-│  10-tier search: BMH · bitmap · trie · DFA automaton · search-VM │
-│  Start-byte bitmap · min-length pre-check · literal fast-path    │
-└──────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────┐
+│  SNOBOL4 VM — computed-goto dispatch (15-30% over switch)         │
+│  11-tier search: fusion · SIMD · auto · search-VM · trie · bitmap │
+│  BMH · prefix · literal · SPAN/BREAK · required-byte prefilter    │
+└────────────────────────────────────────────────────────────────────┘
 ```
 
 | Feature                   | Detail                                                                                                            |
 |---------------------------|-------------------------------------------------------------------------------------------------------------------|
-| **Dispatch**              | Computed-goto opcode dispatch (15-30% faster). MSVC switch fallback.                                              |
-| **Search Acceleration**   | 10-tier pipeline: BREAK/SPAN → literal-only → literal-prefix (BMH) → bitmap → alt-literals trie → search-VM → DFA automaton → SIMD NFA → general VM |
+| **Dispatch**              | Computed-goto opcode dispatch (15-30% faster). MSVC switch fallback. PGO build targets (LTO+profile).              |
+| **Search Acceleration**   | 11-tier pipeline: fused automaton → SIMD NFA → DFA automaton → search-VM → alt-literals trie → bitmap → BMH prefix → literal-only → SPAN/BREAK scan + required-byte prefilter |
+| **Batch API**             | `snobol_pattern_search_batch()` — single-pass all-matches with flat capture/output arrays. `snobol_pattern_search_next()` — ~8 ns/call lean single-literal search. |
 | **Platforms**             | macOS ARM64/Intel, Linux AArch64/x86-64/ARMv7/RISC-V, Windows x86-64                                              |
-| **Bindings**              | PHP (stable) — Python reference in progress                                                                       |
-| **Pattern Engine**        | Backtracking VM with computed-goto dispatch, catastrophic backtracking protection, compact choice stack, UTF-8 with full BMP case folding |
+| **Bindings**              | PHP (stable) — generators, lazy SplitIterator, flat results, capture-as-offsets, metrics opt-in, DFA/trie/SIMD caching |
+| **Pattern Engine**        | Backtracking VM with computed-goto dispatch, catastrophic backtracking protection, trail-based compact choice stack (arena allocator, undo-log replay), UTF-8 with full BMP case folding |
 | **Template Substitution** | Compiled C VM instructions — captures, formatting, table lookups                                                  |
-| **CI**                    | Native runners: macOS ARM64/x86-64, Linux AArch64/x86-64/ARMv7/RISC-V, Windows x86-64                            |
+| **CI**                    | Native runners: macOS ARM64/x86-64, Linux AArch64/x86-64/ARMv7/RISC-V, Windows x86-64. ASan+UBSan. PGO.         |
 | **Distro**                | Homebrew (macOS), PIE (PHP), GitHub Releases                                                                      |
 
 ```c
