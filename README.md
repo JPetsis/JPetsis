@@ -90,17 +90,17 @@ A **high-performance SNOBOL4** string-processing engine in C — a PCRE alternat
 └────────────────────────────────────────────────────────────────────┘
 ```
 
-| Feature                   | Detail                                                                                                            |
-|---------------------------|-------------------------------------------------------------------------------------------------------------------|
-| **Dispatch**              | Computed-goto opcode dispatch (15-30% faster). MSVC switch fallback. PGO build targets (LTO+profile).              |
-| **Search Acceleration**   | 11-tier pipeline: fused automaton → SIMD NFA → DFA automaton → search-VM → alt-literals trie → bitmap → BMH prefix → literal-only → SPAN/BREAK scan + required-byte prefilter |
-| **Batch API**             | `snobol_pattern_search_batch()` — single-pass all-matches with flat capture/output arrays. `snobol_pattern_search_next()` — ~8 ns/call lean single-literal search. |
-| **Platforms**             | macOS ARM64/Intel, Linux AArch64/x86-64/ARMv7/RISC-V, Windows x86-64                                              |
-| **Bindings**              | PHP (stable) — generators, lazy SplitIterator, flat results, capture-as-offsets, metrics opt-in, DFA/trie/SIMD caching |
+| Feature                   | Detail                                                                                                                                                                                   |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Dispatch**              | Computed-goto opcode dispatch (15-30% faster). MSVC switch fallback. PGO build targets (LTO+profile).                                                                                    |
+| **Search Acceleration**   | 11-tier pipeline: fused automaton → SIMD NFA → DFA automaton → search-VM → alt-literals trie → bitmap → BMH prefix → literal-only → SPAN/BREAK scan + required-byte prefilter            |
+| **Batch API**             | `snobol_pattern_search_batch()` — single-pass all-matches with flat capture/output arrays. `snobol_pattern_search_next()` — ~8 ns/call lean single-literal search.                       |
+| **Platforms**             | macOS ARM64/Intel, Linux AArch64/x86-64/ARMv7/RISC-V, Windows x86-64                                                                                                                     |
+| **Bindings**              | PHP (stable) — generators, lazy SplitIterator, flat results, capture-as-offsets, metrics opt-in, DFA/trie/SIMD caching                                                                   |
 | **Pattern Engine**        | Backtracking VM with computed-goto dispatch, catastrophic backtracking protection, trail-based compact choice stack (arena allocator, undo-log replay), UTF-8 with full BMP case folding |
-| **Template Substitution** | Compiled C VM instructions — captures, formatting, table lookups                                                  |
-| **CI**                    | Native runners: macOS ARM64/x86-64, Linux AArch64/x86-64/ARMv7/RISC-V, Windows x86-64. ASan+UBSan. PGO.         |
-| **Distro**                | Homebrew (macOS), PIE (PHP), GitHub Releases                                                                      |
+| **Template Substitution** | Compiled C VM instructions — captures, formatting, table lookups                                                                                                                         |
+| **CI**                    | Native runners: macOS ARM64/x86-64, Linux AArch64/x86-64/ARMv7/RISC-V, Windows x86-64. ASan+UBSan. PGO.                                                                                  |
+| **Distro**                | Homebrew (macOS), PIE (PHP), GitHub Releases                                                                                                                                             |
 
 ```c
 // One-shot convenience API
