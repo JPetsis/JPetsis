@@ -21,7 +21,7 @@
 
 I build **programming language infrastructure** and **full-stack systems** — from multi-tier pattern matching engines to production web applications.
 
-- **libsnobol4** — A high-performance SNOBOL4 string-processing engine in C with computed-goto dispatch, 11-tier search acceleration (pattern fusion, SIMD NFA, DFA automaton, trie, BMH), required-byte prefilter, batch all-matches API, and lean ~8 ns/call single-literal search. Pattern matching, template substitution, captures, associative tables, and a stable PHP binding (generators, lazy SplitIterator).
+- **libsnobol4** — A high-performance SNOBOL4 string-processing engine in C with computed-goto dispatch, 11-tier search acceleration (pattern fusion, SIMD NFA, DFA automaton, trie, BMH), required-byte prefilter, batch all-matches API, and lean ~8 ns/call single-literal search. Pattern matching, template substitution, captures, associative tables, sparse arrays, and a stable PHP binding (generators, lazy SplitIterator).
 - **cadence** — A multi-tenant driving school management platform in Go, using chi, PostgreSQL, HTMX, and TailwindCSS.
 - Ask me about **compilers, language runtimes, search engines, or building web apps with Go & Laravel.**
 
@@ -81,7 +81,7 @@ I build **programming language infrastructure** and **full-stack systems** — f
 
 ### <picture><source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/libsnobol4-16213E?style=for-the-badge&labelColor=0f3460&logo=c&logoColor=white"/><img src="https://img.shields.io/badge/libsnobol4-0f3460?style=for-the-badge&logo=c&logoColor=white"/></picture>
 
-A **high-performance SNOBOL4** string-processing engine in C — a PCRE alternative with **11-tier search acceleration** (fused concat-pattern automaton, SIMD NFA, DFA automaton, trie), **required-byte prefilter**, **batch + lean tokenize APIs**, and **computed-goto dispatch**. Now at **v0.13.0**.
+A **high-performance SNOBOL4** string-processing engine in C — a PCRE alternative with **11-tier search acceleration** (fused concat-pattern automaton, SIMD NFA, DFA automaton, trie), **required-byte prefilter**, **batch + lean tokenize APIs**, and **computed-goto dispatch**. Now stable at **v1.0.1**.
 
 ```
 ┌────────────────────────────────────────────────────────────────────┐
@@ -96,12 +96,14 @@ A **high-performance SNOBOL4** string-processing engine in C — a PCRE alternat
 | **Dispatch**              | Computed-goto opcode dispatch (15-30% faster). MSVC switch fallback. PGO build targets (LTO+profile).                                                                                                          |
 | **Search Acceleration**   | 11-tier pipeline: fused concat-pattern automaton (Tier 10, no VM) → SIMD NFA → DFA automaton → search-VM → alt-literals trie → bitmap → BMH prefix → literal-only → SPAN/BREAK scan + required-byte prefilter  |
 | **Batch & Tokenize API**  | `snobol_pattern_search_batch()` / stateful `..._batch_ex()` — single-pass all-matches with flat capture/output arrays. `snobol_pattern_search_next()` — ~8 ns/call lean single-literal search (memchr/memmem). |
-| **Platforms**             | macOS ARM64/Intel, Linux AArch64/x86-64/ARMv7/RISC-V, Windows x86-64                                                                                                                                           |
-| **Bindings**              | PHP (stable, v0.13.0) — generators, lazy SplitIterator, flat results, capture-as-offsets, metrics opt-in, DFA/trie/SIMD/fusion caching                                                                         |
-| **Pattern Engine**        | Backtracking VM with computed-goto dispatch, catastrophic backtracking protection, trail-based compact choice stack (arena allocator, undo-log replay), UTF-8 with full BMP case folding                       |
-| **Template Substitution** | Compiled C VM instructions — captures, formatting, table lookups                                                                                                                                               |
-| **CI**                    | Native runners: macOS ARM64/x86-64, Linux AArch64/x86-64/ARMv7/RISC-V, Windows x86-64. ASan+UBSan. PGO.                                                                                                        |
-| **Distro**                | Homebrew (macOS), PIE (PHP), GitHub Releases                                                                                                                                                                   |
+| **Data Types**            | Associative tables, sparse integer-keyed arrays (`snobol_array_*`), numeric/comparison functions (`snobol_text_eq`/`lt`/`gt`)                                                                                                                |
+| **Platforms**             | macOS ARM64/Intel, Linux AArch64/x86-64/ARMv7/RISC-V, Windows x86-64                                                                                                                                                                           |
+| **Bindings**              | PHP (stable) — generators, lazy SplitIterator, flat results, capture-as-offsets, metrics opt-in, DFA/trie/SIMD/fusion caching                                                                                                                    |
+| **Pattern Engine**        | Backtracking VM with computed-goto dispatch, catastrophic backtracking protection, trail-based compact choice stack (arena allocator, undo-log replay), UTF-8 with full BMP case folding                                                       |
+| **Template Substitution** | Compiled C VM instructions — captures, formatting, table lookups                                                                                                                                                                               |
+| **Quality Gates**         | 90%+ core & PHP coverage with Codecov gate, CodeQL, ASan+UBSan/valgrind leak-checked CI                                                                                                                                                          |
+| **CI**                    | Native runners: macOS ARM64/x86-64, Linux AArch64/x86-64/ARMv7/RISC-V, Windows x86-64. ASan+UBSan. PGO.                                                                                                                                        |
+| **Distro**                | Homebrew (macOS), PIE (PHP), GitHub Releases                                                                                                                                                                                                   |
 
 ```c
 // One-shot convenience API
